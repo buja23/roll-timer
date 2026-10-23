@@ -1,7 +1,7 @@
 import { defaultWorkout, validateWorkout, Workout } from './timer';
 export interface Settings { sound: boolean; soundType: 'beep' | 'whistle' | 'gong'; voice: boolean; vibration: boolean; countdown: boolean; volume: number; keepAwake: boolean; orientation: 'auto' | 'portrait' | 'landscape'; fullscreen: boolean; appearance: 'dark' | 'contrast' }
 export interface Preset { id: string; name: string; workout: Workout; builtin?: boolean }
-export interface Preferences { settings: Settings; workout: Workout; presets: Preset[] }
+export interface Preferences { settings: Settings; workout: Workout; presets: Preset[]; selectedPresetId?: string }
 export const defaultSettings: Settings = { sound: true, soundType: 'gong', voice: false, vibration: false, countdown: true, volume: 0.8, keepAwake: true, orientation: 'auto', fullscreen: false, appearance: 'dark' };
 export const builtinPresets = (): Preset[] => [
   { id: 'quick', name: 'Rola rápido', workout: { ...defaultWorkout, fight: 180, rest: 30 }, builtin: true },
@@ -27,7 +27,9 @@ export function decodePreferences(raw: string | null): Preferences {
     if (!Number.isFinite(settings.volume)) settings.volume = 0.8;
     settings.volume = Math.min(1, Math.max(0, settings.volume));
     const presets = Array.isArray(value.presets) ? value.presets.filter(p => p && typeof p.id === 'string' && typeof p.name === 'string' && p.name.trim() && p.workout && !validateWorkout(p.workout)).filter((p, i, a) => a.findIndex(x => x.id === p.id) === i) : fallback.presets;
-    return { settings, workout: value.workout && !validateWorkout(value.workout) ? value.workout : fallback.workout, presets };
+    const result: Preferences = { settings, workout: value.workout && !validateWorkout(value.workout) ? value.workout : fallback.workout, presets };
+    if (typeof value.selectedPresetId === 'string' && presets.some(p => p.id === value.selectedPresetId)) result.selectedPresetId = value.selectedPresetId;
+    return result;
   } catch { return fallback; }
 }
 export const loadPreferences = async (storage: Storage) => decodePreferences(await storage.getItem(PREF_KEY));

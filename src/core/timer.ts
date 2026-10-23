@@ -1,16 +1,16 @@
 export type Phase = 'prepare' | 'fight' | 'rest' | 'finished';
 export interface Workout {
   prepare: number; fight: number; rest: number; rounds: number;
-  infinite: boolean; cycles: number; cycleRest: number;
+  infinite: boolean; cycles: number; cycleRest: number; cycleRestEnabled: boolean;
 }
-export const defaultWorkout: Workout = { prepare: 10, fight: 300, rest: 60, rounds: 8, infinite: false, cycles: 1, cycleRest: 120 };
+export const defaultWorkout: Workout = { prepare: 10, fight: 300, rest: 60, rounds: 8, infinite: false, cycles: 1, cycleRest: 120, cycleRestEnabled: false };
 export interface Segment { phase: 'fight' | 'rest'; duration: number; round: number }
 export interface Plan { prepare: number; segments: Segment[]; period: number; repeats: number; total: number; rounds: number; tail: number }
 export function validateWorkout(w: Workout): string | null {
   for (const k of ['prepare', 'fight', 'rest', 'cycleRest'] as const)
     if (!Number.isInteger(w[k]) || w[k] < (k === 'fight' ? 1 : 0) || w[k] > 5999) return 'Use durações entre 0:00 e 99:59; a luta precisa de pelo menos 1 segundo.';
   if (!Number.isInteger(w.rounds) || w.rounds < 1 || w.rounds > 99 || !Number.isInteger(w.cycles) || w.cycles < 1 || w.cycles > 99) return 'Rodadas e ciclos devem estar entre 1 e 99.';
-  if (typeof w.infinite !== 'boolean') return 'Modo infinito inválido.';
+  if (typeof w.infinite !== 'boolean' || typeof w.cycleRestEnabled !== 'boolean') return 'Modo de treino inválido.';
   return null;
 }
 export function makePlan(w: Workout): Plan {
@@ -18,7 +18,7 @@ export function makePlan(w: Workout): Plan {
   const segments: Segment[] = [];
   for (let round = 1; round <= w.rounds; round++) {
     segments.push({ phase: 'fight', duration: w.fight * 1000, round });
-    const rest = round === w.rounds ? (w.cycles > 1 || w.infinite ? w.cycleRest : w.rest) : w.rest;
+    const rest = round === w.rounds && w.cycleRestEnabled ? w.cycleRest : w.rest;
     if (rest > 0) segments.push({ phase: 'rest', duration: rest * 1000, round });
   }
   const period = segments.reduce((sum, s) => sum + s.duration, 0);

@@ -1,0 +1,27 @@
+{
+  "id": "f5096b2e-7142-4e0d-bea2-c4edd2220539",
+  "version": "1.2.0",
+  "versionCode": "3",
+  "url": "https://expo.dev/artifacts/eas/tpYSIT3o8qMoxzxHPVqAP-Qxi1xhKJ5_ey6jSN6mBD4.apk",
+  "size": 97056298,
+  "entries": 1262,
+  "required": [
+    "AndroidManifest.xml",
+    "assets/index.android.bundle",
+    "assets/roll-timer/beep.wav",
+    "assets/roll-timer/gong.wav",
+    "assets/roll-timer/tick.wav",
+    "assets/roll-timer/whistle.wav"
+  ],
+  "fonts": [
+    {
+      "name": "res/n1.ttf",
+      "size": 61400,
+      "compressed": 28495,
+      "method": 8,
+      "localOffset": 95611375,
+      "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73"
+    }
+  ],
+  "note": "Inspeção ZIP via HTTP Range e SHA-256 da fonte extraída; não instala nem executa a APK."
+}
