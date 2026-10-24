@@ -8,9 +8,11 @@ import { phaseSurface, PhaseIndicator, RoundIndicator, TimerProgress } from './T
 import { OrientationToggle } from './OrientationToggle';
 import { TimerControls } from './TimerControls';
 import { TimerIconButton } from './TimerIconButton';
+import { AudioVolumeHint } from './AudioVolumeHint';
 export interface TimerPresentationProps {
   frame: Frame; workout: Workout; paused: boolean;
   rotating: boolean; error?: string | null;
+  audioEnabled?: boolean;
   onBack: () => void; onRotate: () => void; onPause: () => void; onRestart: () => void;
 }
 export function TimerPresentation(p: TimerPresentationProps) {
@@ -32,6 +34,7 @@ export function TimerPresentation(p: TimerPresentationProps) {
       {finished && <Label style={{ textAlign: 'center', color: ink }}>{p.frame.completed} rodadas concluídas</Label>}
       <TimerProgress frame={p.frame} color={ink} />
       <TimerControls paused={p.paused} finished={finished} color={ink} onPause={p.onPause} onRestart={p.onRestart} />
+      <AudioVolumeHint enabled={p.audioEnabled ?? false} color={ink} />
       {p.error && <Label accessibilityLiveRegion="polite" style={{ color: ink, fontSize: 12 }}>{p.error}</Label>}
     </View>
   </SafeAreaView>;

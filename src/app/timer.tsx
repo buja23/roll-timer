@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, BackHandler, useWindowDimensions } from 'react-native';
-import { router, useFocusEffect } from 'expo-router';
+import { router, Stack, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useApp } from '../state/AppProvider';
 import { frameAt } from '../core/timer';
@@ -17,7 +17,7 @@ export default function TimerScreen() {
   const frame = session ? frameAt(session.plan, session.currentElapsed) : null;
   const hasSession = Boolean(session);
   const finished = frame?.phase === 'finished';
-  const { error, rotating, toggleOrientation } = useTrainingDisplay(Boolean(session && !finished), session?.settings, width > height, mode => void update({ ...prefs, settings: { ...prefs.settings, orientation: mode } }));
+  const { error, rotating, toggleOrientation, screenOrientation } = useTrainingDisplay(Boolean(session && !finished), session?.settings, width > height, mode => void update({ ...prefs, settings: { ...prefs.settings, orientation: mode } }));
   useEffect(() => { const timeout = setTimeout(() => setWaiting(false), 1500); return () => clearTimeout(timeout); }, []);
   const invoke = useCallback((action: Parameters<typeof command>[0]) => { try { command(action); return true; } catch (e) { Alert.alert('Ação indisponível', String(e)); return false; } }, []);
   const restart = () => {
@@ -36,7 +36,8 @@ export default function TimerScreen() {
   useFocusEffect(useCallback(() => { const listener = BackHandler.addEventListener('hardwareBackPress', () => { end(); return true; }); return () => listener.remove(); }, [end]));
   if (!session || !frame) return <Screen><Label>{waiting ? 'Iniciando sessão…' : 'Nenhuma sessão ativa.'}</Label><Button title="Voltar ao início" onPress={() => router.replace('/')} /></Screen>;
   return <>
+    <Stack.Screen options={{ orientation: screenOrientation === 'portrait' ? 'portrait_up' : 'landscape' }} />
     <StatusBar style={phaseSurface[frame.phase].ink === '#FFFFFF' ? 'light' : 'dark'} hidden={session.settings.fullscreen && !finished} />
-    <TimerPresentation frame={frame} workout={session.workout} paused={session.paused} rotating={rotating} error={error} onBack={end} onRotate={() => void toggleOrientation()} onPause={() => invoke(session.paused ? 'resume' : 'pause')} onRestart={restart} />
+    <TimerPresentation frame={frame} workout={session.workout} paused={session.paused} rotating={rotating} error={error} audioEnabled={session.settings.sound || session.settings.voice} onBack={end} onRotate={() => void toggleOrientation()} onPause={() => invoke(session.paused ? 'resume' : 'pause')} onRestart={restart} />
   </>;
 }

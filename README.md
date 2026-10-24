@@ -8,15 +8,15 @@ Implementado com Expo SDK 58, React Native, TypeScript estrito, Expo Router e As
 
 - Preparação, luta, descanso, rodadas, ciclos e modo infinito.
 - Descanso entre ciclos substitui o descanso comum; o treino termina na última luta.
-- Pausar, continuar, avançar, reiniciar e encerrar, com confirmação nas ações de reinício/encerramento.
-- Cronômetro responsivo vertical/horizontal, progresso, próxima etapa e destaque nos últimos cinco segundos.
-- Bips regressivos e três sinais de transição: bip eletrônico, apito e gongo. Arquivos PCM originais incluídos no aplicativo.
-- Volume relativo ao volume de mídia do sistema, prévia de som, voz pt-BR offline opcional e vibração.
+- Pausar, continuar, reiniciar e encerrar, com confirmação nas ações de reinício/encerramento.
+- Treino abre na horizontal, com rotação manual; menus verticais e cronômetro responsivo em Roboto Condensed Bold, sem deformação dos caracteres.
+- Sete efeitos originais: bip eletrônico, competição, gongo, sino de boxe, buzina, apito e alarme; sons independentes por evento e versões curtas para a contagem.
+- Intensidades Normal/Forte/Máximo, volume relativo ao volume de mídia, prévia individual e de cinco bips mais gongo, voz pt-BR offline opcional e vibração.
 - Favoritos padrão e personalizados: criar, editar, usar, iniciar, excluir personalizados e restaurar padrões.
 - Preferências locais, tela ligada, tela cheia e visual de alto contraste.
 - Serviço Android `specialUse`, notificação com pausa/continuação e encerramento, relógio monotônico e recuperação da sessão no mesmo boot.
 
-**Versão atual: 1.2.0.** Temporizador com números gigantes em Bebas Neue, fundo por etapa, controles com ícones e rotação manual. [Baixar APK de teste, aproximadamente 97 MB](https://expo.dev/artifacts/eas/tpYSIT3o8qMoxzxHPVqAP-Qxi1xhKJ5_ey6jSN6mBD4.apk). A [compilação Android no EAS](https://expo.dev/accounts/buja23/projects/roll-timer/builds/f5096b2e-7142-4e0d-bea2-c4edd2220539) passou. Lint, tipos, 28 testes de lógica/apresentação e 106 verificações de interface passaram. Fonte, bundle offline e quatro sons foram conferidos no APK. Veja [alterações, componentes, capturas e limites da validação](docs/REDESIGN.md). A nova interface e os recursos de áudio/segundo plano ainda precisam ser conferidos no aparelho com o [roteiro Android](docs/TESTES-ANDROID.md).
+**Versão atual: 1.1.0 / código Android 4**, conforme o nome solicitado para esta entrega; o código crescente permite atualizar a APK anterior identificada como 1.2.0 / código 3. [Baixar APK de teste, aproximadamente 98 MB](https://expo.dev/artifacts/eas/oE0JnW-tyhdW7oXoQBBg62ePkxqyaenixuAf7VPvpNY.apk). A [compilação Android no EAS](https://expo.dev/accounts/buja23/projects/roll-timer/builds/059ef69a-e22a-4fe1-b87b-6813961b1d8d) passou. Lint, tipos, 32 testes e 128 verificações de interface passaram. Fonte, bundle offline, 14 WAVs e licenças conferidos na APK. Veja [alterações, arquivos, capturas e limites da validação](docs/V1.1.0.md). Audição real, Bluetooth, rotação física, tela bloqueada e segundo plano precisam de validação no aparelho; testes Kotlin/JVM permanecem pendentes.
 
 ## Instalação e desenvolvimento
 
@@ -54,7 +54,7 @@ O perfil `preview` em [eas.json](eas.json) gera uma APK de release com JavaScrip
 adb install -r .\RollTimer.apk
 ```
 
-A APK de teste foi gerada na nuvem e o link acima foi verificado. A inspeção parcial do ZIP confirmou o manifesto Android, o bundle offline e os quatro WAV locais.
+A APK de teste foi gerada na nuvem e o link acima foi verificado. A inspeção do ZIP confirmou manifesto, bundle offline e recursos locais; os hashes da fonte, dos 14 WAVs e das licenças correspondem aos arquivos do projeto.
 
 ## Build local e produção
 

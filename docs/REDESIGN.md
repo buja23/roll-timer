@@ -1,5 +1,7 @@
 # Redesign e temporizador — versão 1.2.0
 
+Registro da etapa anterior. A atualização solicitada como **1.1.0 / código Android 4** substitui a fonte alongada, acrescenta áudio por evento e abre o treino na horizontal. Consulte [V1.1.0.md](V1.1.0.md) para o comportamento e a validação atuais. As capturas em `redesign/` foram atualizadas para essa nova entrega.
+
 ## Resultado
 
 O temporizador usa uma superfície inteira por etapa: preparar `#FACC15` com números pretos, luta `#9AFF3D` com números pretos e descanso `#EF3128` com números brancos. Pausar conserva o fundo, acrescenta “PAUSADO” à etapa e troca pausa por reprodução. A conclusão retorna à identidade escura.

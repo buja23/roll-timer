@@ -8,7 +8,7 @@ const workout = { ...defaultWorkout, fight: query.has('hours') ? 5999 : query.ha
 const plan = makePlan(workout);
 const phase = query.get('phase');
 const elapsed = phase === 'prepare' ? 5000 : phase === 'rest' ? 310000 : phase === 'finished' ? plan.total : query.has('running') ? 309200 : query.has('urgent') ? 307000 : 10000;
-export const trace = { commands: [] as string[], locks: [] as number[], alerts: [] as string[], session: null as NativeSession | null, prefs: defaults(), selectedLock: 0, confirm: true, hardwareBack: null as null | (() => boolean), tick: (_elapsed: number) => {} };
+export const trace = { commands: [] as string[], locks: [] as number[], alerts: [] as string[], session: null as NativeSession | null, prefs: defaults(), selectedLock: 0, confirm: true, previewStops: 0, hardwareBack: null as null | (() => boolean), tick: (_elapsed: number) => {} };
 declare global { interface Window { __rollPreview: typeof trace } }
 window.__rollPreview = trace;
 const initial: NativeSession = { workout, plan, currentElapsed: elapsed, settings: { ...defaults().settings }, paused: query.has('paused') };
@@ -34,10 +34,12 @@ export function useFocusEffect(effect: () => void | (() => void)) { useEffect(ef
 export const useLocalSearchParams = () => useContext(NavContext);
 const navigate = (type: string, path?: string | { pathname: string; params?: Record<string, string> }) => window.dispatchEvent(new CustomEvent('preview-navigation', { detail: { type, path } }));
 export const router = { push: (p: string | { pathname: string; params?: Record<string, string> }) => navigate('push', p), replace: (p: string) => navigate('replace', p), back: () => navigate('back') };
+export const Stack = { Screen: (_props: { options: object }) => null };
 export const nativeAvailable = true;
 export const command = (action: string) => { trace.commands.push(action); const s = trace.session; if (!s) return; if (action === 'stop') runtime.setSession(null); else if (action === 'pause' || action === 'resume') runtime.setSession({ ...s, paused: action === 'pause' }); else if (action === 'restart') runtime.setSession({ ...s, currentElapsed: 0, paused: false }); };
-export const stopPreview = () => {};
-export const previewSound = (_settings: Settings) => { trace.commands.push('preview'); };
+export const stopPreview = () => { trace.previewStops++; };
+export const previewSound = (_settings: Settings, sound = 'gong', sequence = false) => { trace.commands.push(sequence ? 'preview:sequence' : `preview:${sound}`); };
+export const audioStatus = () => ({ lowVolume: query.has('lowVolume'), silent: query.has('silent'), mediaVolume: query.has('lowVolume') ? 1 : 10, mediaMax: 15 });
 export const startSession = (w: Workout, settings: Settings) => { trace.commands.push('start'); runtime.setSession({ workout: w, plan: makePlan(w), settings, currentElapsed: 0, paused: false }); };
 export const StatusBar = () => null;
 export const OrientationLock = { DEFAULT: 0, PORTRAIT_UP: 1, LANDSCAPE: 2 };

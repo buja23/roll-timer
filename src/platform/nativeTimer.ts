@@ -1,11 +1,13 @@
 import { requireOptionalNativeModule } from 'expo';
 import { Settings } from '../core/preferences';
+import { SoundId } from '../core/audio';
 import { makePlan, Plan, Workout } from '../core/timer';
 interface NativeTimer {
   snapshot(): string | null;
   command(command: string, payload: string | null): void;
   preview(settings: string): void;
   stopPreview(): void;
+  audioStatus(): string;
 }
 export interface NativeSession { workout: Workout; plan: Plan; settings: Settings; currentElapsed: number; paused: boolean }
 const native = requireOptionalNativeModule<NativeTimer>('RollTimer');
@@ -17,8 +19,10 @@ export function startSession(workout: Workout, settings: Settings) {
   native.command('start', JSON.stringify({ workout, plan: makePlan(workout), settings }));
 }
 export function command(command: 'pause' | 'resume' | 'skip' | 'restart' | 'stop' | 'restore') { native?.command(command, null); }
-export function previewSound(settings: Settings) {
+export function previewSound(settings: Settings, sound: SoundId = 'gong', sequence = false) {
   if (!native) throw new Error('O teste de som está disponível na build Android, com o módulo nativo instalado.');
-  native.preview(JSON.stringify({ ...settings, sound: true }));
+  native.preview(JSON.stringify({ ...settings, sound: true, _previewSound: sound, _previewSequence: sequence }));
 }
 export const stopPreview = () => native?.stopPreview();
+export interface AudioStatus { mediaVolume: number; mediaMax: number; lowVolume: boolean; silent: boolean }
+export function audioStatus(): AudioStatus | null { return native?.audioStatus ? JSON.parse(native.audioStatus()) as AudioStatus : null; }

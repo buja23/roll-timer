@@ -9,7 +9,8 @@ const locks = { auto: Orientation.OrientationLock.DEFAULT, portrait: Orientation
 export function useTrainingDisplay(active: boolean, settings: Settings | undefined, isLandscape: boolean, onSelected: (mode: DisplayOrientation) => void) {
   const [error, setError] = useState<string | null>(null);
   const [rotating, setRotating] = useState(false);
-  const desired = useRef<DisplayOrientation>('auto');
+  const [screenOrientation, setScreenOrientation] = useState<'portrait' | 'landscape'>('landscape');
+  const desired = useRef<DisplayOrientation>('landscape');
   const busy = useRef(false);
   const [controller] = useState(() => new OrientationController({
     lock: async mode => {
@@ -20,10 +21,11 @@ export function useTrainingDisplay(active: boolean, settings: Settings | undefin
     restore: async () => { if (Platform.OS !== 'web') await Orientation.lockAsync(await Orientation.supportsOrientationLockAsync(Orientation.OrientationLock.PORTRAIT_UP) ? Orientation.OrientationLock.PORTRAIT_UP : Orientation.OrientationLock.DEFAULT); },
   }));
   useFocusEffect(useCallback(() => {
-    desired.current = settings?.orientation ?? 'auto';
+    desired.current = 'landscape';
+    setScreenOrientation('landscape');
     void controller.enter(desired.current).catch(() => setError('Não foi possível aplicar a orientação. Você pode tentar pelo botão de rotação.'));
     return () => { busy.current = false; void controller.leave().catch(() => undefined); };
-  }, [controller, settings?.orientation]));
+  }, [controller]));
   useFocusEffect(useCallback(() => {
     if (Platform.OS !== 'android') return;
     void NavigationBar.setVisibilityAsync(active && settings?.fullscreen ? 'hidden' : 'visible').catch(() => setError('O aparelho não permitiu ocultar a barra de navegação.'));
@@ -36,9 +38,9 @@ export function useTrainingDisplay(active: boolean, settings: Settings | undefin
     const landscape = previous === 'auto' ? isLandscape : previous === 'landscape';
     const mode = landscape ? 'portrait' : 'landscape';
     desired.current = mode;
-    try { if (await controller.rotate(mode)) { setError(null); onSelected(mode); } }
+    try { if (await controller.rotate(mode)) { setScreenOrientation(mode); setError(null); onSelected(mode); } }
     catch { desired.current = previous; setError('Não foi possível girar a tela. Tente novamente ou confira as restrições do aparelho.'); }
     finally { busy.current = false; setRotating(false); }
   };
-  return { error, rotating, toggleOrientation };
+  return { error, rotating, toggleOrientation, screenOrientation };
 }

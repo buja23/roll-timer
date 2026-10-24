@@ -1,0 +1,100 @@
+[
+  {
+    "file": "beep.wav",
+    "duration": 0.24,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -7.724262613889417
+  },
+  {
+    "file": "beep-short.wav",
+    "duration": 0.18,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -7.786185334112652
+  },
+  {
+    "file": "competition.wav",
+    "duration": 0.24,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -7.141040911135411
+  },
+  {
+    "file": "competition-short.wav",
+    "duration": 0.18,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -7.209179288547462
+  },
+  {
+    "file": "gong.wav",
+    "duration": 1.35,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -12.95753290047551
+  },
+  {
+    "file": "gong-short.wav",
+    "duration": 0.18,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -10.040488945212154
+  },
+  {
+    "file": "bell.wav",
+    "duration": 1.2,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -13.549379913714532
+  },
+  {
+    "file": "bell-short.wav",
+    "duration": 0.18,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -10.231514706912254
+  },
+  {
+    "file": "horn.wav",
+    "duration": 0.85,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -11.521854145407815
+  },
+  {
+    "file": "horn-short.wav",
+    "duration": 0.18,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -11.550188182162325
+  },
+  {
+    "file": "whistle.wav",
+    "duration": 0.7,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -8.467944341755167
+  },
+  {
+    "file": "whistle-short.wav",
+    "duration": 0.18,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -8.630070976234698
+  },
+  {
+    "file": "alarm.wav",
+    "duration": 0.9,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -7.71897223089522
+  },
+  {
+    "file": "alarm-short.wav",
+    "duration": 0.18,
+    "rate": 44100,
+    "peakDbFS": -1,
+    "rmsDbFS": -7.879477259159771
+  }
+]

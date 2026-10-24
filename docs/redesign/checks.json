@@ -1,5 +1,5 @@
 {
-  "checks": 106,
-  "screenshots": 8,
+  "checks": 128,
+  "screenshots": 21,
   "note": "Componentes React Native renderizados no Chromium via React Native Web. APIs Android substituídas apenas no harness; não valida rotação física, áudio ou segundo plano reais."
 }

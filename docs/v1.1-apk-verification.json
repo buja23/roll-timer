@@ -1,0 +1,122 @@
+{
+  "id": "059ef69a-e22a-4fe1-b87b-6813961b1d8d",
+  "version": "1.1.0",
+  "versionCode": "4",
+  "url": "https://expo.dev/artifacts/eas/oE0JnW-tyhdW7oXoQBBg62ePkxqyaenixuAf7VPvpNY.apk",
+  "size": 97764427,
+  "entries": 1275,
+  "required": [
+    "AndroidManifest.xml",
+    "assets/index.android.bundle",
+    "assets/roll-timer/beep.wav",
+    "assets/roll-timer/beep-short.wav",
+    "assets/roll-timer/competition.wav",
+    "assets/roll-timer/competition-short.wav",
+    "assets/roll-timer/gong.wav",
+    "assets/roll-timer/gong-short.wav",
+    "assets/roll-timer/bell.wav",
+    "assets/roll-timer/bell-short.wav",
+    "assets/roll-timer/horn.wav",
+    "assets/roll-timer/horn-short.wav",
+    "assets/roll-timer/whistle.wav",
+    "assets/roll-timer/whistle-short.wav",
+    "assets/roll-timer/alarm.wav",
+    "assets/roll-timer/alarm-short.wav",
+    "assets/roll-timer/LICENSE.txt",
+    "assets/licenses/RobotoCondensed-OFL.txt",
+    "assets/roll-timer/tick.wav"
+  ],
+  "fonts": [
+    {
+      "name": "res/oL.ttf",
+      "size": 371616,
+      "compressed": 212509,
+      "method": 8,
+      "localOffset": 96139616,
+      "sha256": "dace262afcee68a5276f200d8026c57221735c0118ab5fda8c2c0d3dc409a8d0"
+    }
+  ],
+  "resources": [
+    {
+      "name": "assets/roll-timer/beep.wav",
+      "size": 21212,
+      "sha256": "6e18efd9f399699f2cadce980bbd77cc28d7a499e6a367f61de47c73a187d494"
+    },
+    {
+      "name": "assets/roll-timer/beep-short.wav",
+      "size": 15920,
+      "sha256": "f533bf0e09279b58bdb1433e1f408cabf2ea3d697f5e3caad3c106b7e7db4f4c"
+    },
+    {
+      "name": "assets/roll-timer/competition.wav",
+      "size": 21212,
+      "sha256": "eecb8ef274924e5d6f51d8193a4f41cb58dd2bf1711fe8ed89c252bca2aa7c6e"
+    },
+    {
+      "name": "assets/roll-timer/competition-short.wav",
+      "size": 15920,
+      "sha256": "2e01c69feb40bad883acab792f23ee8358a8dfaa7256eaf5ee40e6e605aeafc7"
+    },
+    {
+      "name": "assets/roll-timer/gong.wav",
+      "size": 119114,
+      "sha256": "92e410dc5e59d2939503932ed92812e04060f865d3a394dc0420ce9515a95e03"
+    },
+    {
+      "name": "assets/roll-timer/gong-short.wav",
+      "size": 15920,
+      "sha256": "5507b96082a0c5a5edf6821c751238206bbe88e2fe3a5c4f86c2847b514facb7"
+    },
+    {
+      "name": "assets/roll-timer/bell.wav",
+      "size": 105884,
+      "sha256": "dbd3ca1b0db8a15366c8bbc2080faa6f2946ea3c64897c9f780e90746bae6912"
+    },
+    {
+      "name": "assets/roll-timer/bell-short.wav",
+      "size": 15920,
+      "sha256": "0cf17f29aa2c6e33f59c4db34c038da330ad5f25196139b237470ebd8c55a9f7"
+    },
+    {
+      "name": "assets/roll-timer/horn.wav",
+      "size": 75014,
+      "sha256": "5d2c3812d3d811ee44ee89319f50470d071c726620aab18dc178e35366c86076"
+    },
+    {
+      "name": "assets/roll-timer/horn-short.wav",
+      "size": 15920,
+      "sha256": "71d3365210c48618f7634e9596beebbfe6425142e429b937b30fb08696e02d96"
+    },
+    {
+      "name": "assets/roll-timer/whistle.wav",
+      "size": 61784,
+      "sha256": "0d898e038231e575649dfa15dddadbf998acd0daba072f3ed687310972b8c804"
+    },
+    {
+      "name": "assets/roll-timer/whistle-short.wav",
+      "size": 15920,
+      "sha256": "2fc0aaadcf9e78ddae24a4ca72b739d5521b4f61f4e9bc414525a43d18342e12"
+    },
+    {
+      "name": "assets/roll-timer/alarm.wav",
+      "size": 79424,
+      "sha256": "49494b6513e377d26c602b02ac9678c34b3b8b906342b34ac19ce2e00691ed61"
+    },
+    {
+      "name": "assets/roll-timer/alarm-short.wav",
+      "size": 15920,
+      "sha256": "da3370cc30e1f6bbef2d39a8a49c5be8b7800069c65cf5f50586263a5a14cff0"
+    },
+    {
+      "name": "assets/roll-timer/LICENSE.txt",
+      "size": 1267,
+      "sha256": "7d9458459e4a1d828cf9ddf798fe5181e8428d181464a714e4d917ee071c0863"
+    },
+    {
+      "name": "assets/licenses/RobotoCondensed-OFL.txt",
+      "size": 4393,
+      "sha256": "0e4cc6ece88573545be2ed25835363662a6182ba4a4c1b5c8feda52add30e8a6"
+    }
+  ],
+  "note": "Inspeção ZIP via HTTP Range e SHA-256 da fonte, 14 WAV e licenças extraídos; não instala nem executa a APK."
+}

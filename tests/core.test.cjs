@@ -96,7 +96,7 @@ test('corrupção no armazenamento é recuperada e preferências inválidas sane
   assert.deepEqual(decodePreferences('{bad'), defaults());
   const p = defaults(); p.workout.fight = -1; p.settings.volume = 10; p.settings.orientation = 'bad'; p.presets.push({ id: 'bad', name: 'Bad', workout: { fight: -1 } });
   const result = decodePreferences(JSON.stringify(p));
-  assert.equal(result.workout.fight, 300); assert.equal(result.settings.volume, 1); assert.equal(result.settings.orientation, 'auto'); assert.equal(result.presets.length, 3);
+  assert.equal(result.workout.fight, 300); assert.equal(result.settings.volume, 1); assert.equal(result.settings.orientation, 'landscape'); assert.equal(result.presets.length, 3);
 });
 test('falha de armazenamento é propagada ao chamador', async () => {
   await assert.rejects(savePreferences({ setItem: async () => { throw new Error('disk'); } }, defaults()), /disk/);

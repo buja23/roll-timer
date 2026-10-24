@@ -40,7 +40,7 @@ class TimerService : Service() {
     when (action) {
       "pause", "toggle" -> { store.clock(s, store.elapsed(s), if (action == "toggle") !s.getBoolean("paused") else true); audio.stop() }
       "resume" -> store.clock(s, store.elapsed(s), false)
-      "restart" -> { s.remove("lastCue"); s.remove("alertPhase"); store.clock(s, 0, false); lastKey = ""; audio.stop() }
+      "restart" -> { s.remove("lastCue"); s.remove("alertPhase"); s.remove("audioPhase"); store.clock(s, 0, false); lastKey = ""; audio.stop() }
       "skip" -> { store.clock(s, timeline!!.frame(store.elapsed(s)).end, s.getBoolean("paused")); audio.stop() }
     }
     if (s.getJSONObject("settings").optBoolean("voice")) audio.initializeVoice()
@@ -57,10 +57,12 @@ class TimerService : Service() {
       val settings = s.getJSONObject("settings")
       val gate = CueGate(s.optString("lastCue"), s.optString("alertPhase"))
       val cue = gate.next(f, paused, settings.optBoolean("countdown"))
+      val previousPhase = s.optString("audioPhase")
+      s.put("audioPhase", f.phase)
       s.put("alertPhase", gate.phase).put("lastCue", gate.lastCue)
       if (cue != null) {
         store.write(s)
-        runCatching { audio.play(cue == "transition", f.phase, settings, f.phase == "fight" && (f.round > 1 || f.cycle > 1)) }
+        runCatching { audio.play(cue == "transition", f.phase, settings, f.phase == "fight" && (f.round > 1 || f.cycle > 1), previousPhase) }
       }
       lastKey = key
       val label = when (f.phase) { "prepare" -> "PREPARAR"; "fight" -> "LUTA"; "rest" -> "DESCANSO"; else -> "TREINO FINALIZADO" }

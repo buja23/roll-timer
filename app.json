@@ -2,7 +2,7 @@
   "expo": {
     "name": "Roll Timer",
     "slug": "roll-timer",
-    "version": "1.2.0",
+    "version": "1.1.0",
     "scheme": "rolltimer",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -12,7 +12,7 @@
     ],
     "android": {
       "package": "com.rolltimer.app",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "backgroundColor": "#0A0A0B",
         "foregroundImage": "./assets/adaptive-icon.png"
@@ -47,8 +47,11 @@
                 "fontFamily": "RollTimerClock",
                 "fontDefinitions": [
                   {
-                    "path": "./assets/fonts/BebasNeue-Regular.ttf",
-                    "weight": 400
+                    "path": "./assets/fonts/RobotoCondensed.ttf",
+                    "weight": 700,
+                    "axes": {
+                      "wght": 700
+                    }
                   }
                 ]
               }

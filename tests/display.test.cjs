@@ -13,7 +13,8 @@ test('relógio respeita largura e altura medidas nos dois formatos', () => {
   for (const width of [220, 288, 328, 640, 780]) for (const height of [80, 140, 360]) for (const text of ['00:05', '59:59', '01:39:59']) {
     const font = clockFontSize(width, height, text);
     const fit = clockLayout(width, height, text);
-    assert.ok(font * clockWidthUnits(text) * fit.scaleX <= width); assert.ok(font * .9 * fit.scaleY <= height);
+    assert.ok(font * clockWidthUnits(text) <= width); assert.ok(font * .9 <= height);
+    assert.deepEqual(Object.keys(fit), ['fontSize']);
   }
   assert.ok(clockFontSize(288, 180, '01:39:59') < clockFontSize(288, 180, '05:00'));
 });
